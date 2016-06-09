@@ -352,7 +352,11 @@ class CompactWorkflowSerializer(Serializer):
 
         for task in active_tasks:
             transition = task.parent.task_spec.get_outgoing_sequence_flow_by_spec(
-                task.task_spec).id
+                task.task_spec)
+            if transition is None:
+                continue
+            else:
+                transition = transition.id
             w = task.workflow
             workflow_parents = []
             while w.outer_workflow and w.outer_workflow != w:

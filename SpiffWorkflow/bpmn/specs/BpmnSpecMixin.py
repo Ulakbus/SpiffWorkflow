@@ -91,7 +91,13 @@ class BpmnSpecMixin(TaskSpec):
         """
         Returns the outgoing SequenceFlow targeting the specified task_spec.
         """
-        return self.outgoing_sequence_flows[task_spec.name]
+        try:
+            return self.outgoing_sequence_flows[task_spec.name]
+        except KeyError:
+            try:
+                return self.outgoing_sequence_flows.values()[0]
+            except IndexError:
+                return None
 
     def get_outgoing_sequence_flow_by_id(self, id):
         """

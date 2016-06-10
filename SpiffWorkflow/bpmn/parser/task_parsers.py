@@ -174,7 +174,11 @@ class ServiceTaskParser(TaskParser):
         return self.spec_class(self.spec, self.get_task_spec_name(),
                                self.node.get(full_attr('class'), None),
                                self.node.get(full_attr('expression'), None),
-                               self.node.get(full_attr('resultVariable'), None))
+                               self.node.get(full_attr('resultVariable'), None),
+                               self.node.get(full_attr('type'), None),
+                               self.node.get(full_attr('topic'), None)
+
+                               )
 
 
 

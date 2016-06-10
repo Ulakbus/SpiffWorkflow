@@ -25,7 +25,7 @@ class ServiceTask(Simple, BpmnSpecMixin):
     Task Spec for a bpmn:serviceTask node.
     """
 
-    def __init__(self, parent, name, service_class, expression, result_variable,  **kwargs):
+    def __init__(self, parent, name, service_class, expression, result_variable,  type, topic, **kwargs):
         """
         Constructor.
 
@@ -33,6 +33,8 @@ class ServiceTask(Simple, BpmnSpecMixin):
         """
         self.service_class = service_class
         self.expression = expression
+        self.type = type
+        self.topic = topic
         self.result_variable = result_variable
         super(ServiceTask, self).__init__(parent, name, **kwargs)
 

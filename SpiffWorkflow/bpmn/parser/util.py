@@ -18,7 +18,8 @@ from __future__ import division
 
 
 BPMN_MODEL_NS = 'http://www.omg.org/spec/BPMN/20100524/MODEL'
-ATTRIBUTE_NS = 'http://activiti.org/bpmn'
+# ATTRIBUTE_NS = 'http://bpmn.io/schema/bpmn'
+ATTRIBUTE_NS = 'http://camunda.org/schema/1.0/bpmn'
 
 
 def one(nodes, or_none=False):

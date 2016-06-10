@@ -128,7 +128,18 @@ class Packager(object):
         # Parse all of the XML:
         self.bpmn = {}
         for filename in self.input_files:
-            bpmn = ET.parse(filename)
+            # TODO: Remove this after all diagrams converted.
+            # Temp. solution for easier transition from old format
+            with open(filename, 'r') as f:
+                file_obj = StringIO(f.read().replace(
+                    'targetNamespace="http://activiti.org/bpmn"',
+                    'targetNamespace="http://bpmn.io/schema/bpmn"'
+                    ).replace(
+                    'xmlns:camunda="http://activiti.org/bpmn"',
+                    'xmlns:camunda="http://camunda.org/schema/1.0/bpmn"'
+
+                ))
+            bpmn = ET.parse(file_obj) # supports both file path or file like object
             self.bpmn[os.path.abspath(filename)] = bpmn
 
         # Now run through pre-parsing and validation:

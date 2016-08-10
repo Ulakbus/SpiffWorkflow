@@ -107,6 +107,8 @@ class TaskParser(object):
         """
         return self.process_parser.get_lane(self.get_id())
 
+    def get_lane_id(self):
+        return self.process_parser.get_lane_id(self.get_id())
 
     def get_task_spec_name(self, target_ref=None):
         """
@@ -124,7 +126,7 @@ class TaskParser(object):
         """
         Create an instance of the task appropriately. A subclass can override this method to get extra information from the node.
         """
-        return self.spec_class(self.spec, self.get_task_spec_name(), lane=self.get_lane(), description=self.node.get('name', None))
+        return self.spec_class(self.spec, self.get_task_spec_name(), lane=self.get_lane(), lane_id=self.get_lane_id(), description=self.node.get('name', None))
 
     def connect_outgoing(self, outgoing_task, outgoing_task_node, sequence_flow_node, is_default):
         """

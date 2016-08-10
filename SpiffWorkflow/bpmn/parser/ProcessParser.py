@@ -46,6 +46,7 @@ class ProcessParser(object):
         self.svg = svg
         self.filename = filename
         self.id_to_lane_lookup = None
+        self.id_to_lane_id_lookup = None
         self._init_lane_lookup()
 
     def get_id(self):
@@ -83,15 +84,21 @@ class ProcessParser(object):
         """
         return self.id_to_lane_lookup.get(id, None)
 
+    def get_lane_id(self, id):
+        return self.id_to_lane_id_lookup.get(id, None)
+
     def _init_lane_lookup(self):
         self.id_to_lane_lookup = {}
+        self.id_to_lane_id_lookup = {}
         for lane in self.xpath('.//bpmn:lane'):
             name = lane.get('name')
+            lane_id = lane.get('id')
             if name:
                 for ref in xpath_eval(lane)('bpmn:flowNodeRef'):
                     id = ref.text
                     if id:
                         self.id_to_lane_lookup[id] = name
+                        self.id_to_lane_id_lookup[id] = lane_id
 
     def _parse(self):
         start_node_list = self.xpath('.//bpmn:startEvent')

@@ -50,7 +50,7 @@ class BpmnSpecMixin(TaskSpec):
     BPMN specific to the TaskSpec.
     """
 
-    def __init__(self, parent, name, lane=None, **kwargs):
+    def __init__(self, parent, name, lane=None, lane_id=None, **kwargs):
         """
         Constructor.
 
@@ -60,6 +60,7 @@ class BpmnSpecMixin(TaskSpec):
         self.outgoing_sequence_flows = {}
         self.outgoing_sequence_flows_by_id = {}
         self.lane = lane
+        self.lane_id = lane_id
         self.documentation = None
 
     def connect_outgoing(self, taskspec, sequence_flow_id, sequence_flow_name, documentation):

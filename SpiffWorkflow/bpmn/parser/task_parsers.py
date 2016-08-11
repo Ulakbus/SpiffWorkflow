@@ -176,8 +176,9 @@ class ServiceTaskParser(TaskParser):
                                self.node.get(full_attr('expression'), None),
                                self.node.get(full_attr('resultVariable'), None),
                                self.node.get(full_attr('type'), None),
-                               self.node.get(full_attr('topic'), None)
-
+                               self.node.get(full_attr('topic'), None),
+                               lane = self.get_lane(),
+                               lane_id = self.get_lane_id(),
                                )
 
 

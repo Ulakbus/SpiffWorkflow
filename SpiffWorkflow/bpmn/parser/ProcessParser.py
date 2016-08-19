@@ -93,11 +93,12 @@ class ProcessParser(object):
         for lane in self.xpath('.//bpmn:lane'):
             name = lane.get('name')
             lane_id = lane.get('id')
-            if name:
-                for ref in xpath_eval(lane)('bpmn:flowNodeRef'):
-                    id = ref.text
-                    if id:
+            for ref in xpath_eval(lane)('bpmn:flowNodeRef'):
+                id = ref.text
+                if id:
+                    if name:
                         self.id_to_lane_lookup[id] = name
+                    if lane_id:
                         self.id_to_lane_id_lookup[id] = lane_id
 
     def _parse(self):

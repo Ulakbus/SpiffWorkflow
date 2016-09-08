@@ -96,8 +96,9 @@ class BpmnSpecMixin(TaskSpec):
             return self.outgoing_sequence_flows[task_spec.name]
         except KeyError:
             try:
-                return self.outgoing_sequence_flows.values()[0]
-            except IndexError:
+                # Get the first element of dictionary items, compatible with both Python 2 & 3
+                return next(iter(self.outgoing_sequence_flows.values()))
+            except StopIteration:  # Empty dictionary
                 return None
 
     def get_outgoing_sequence_flow_by_id(self, id):
